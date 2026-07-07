@@ -3,17 +3,15 @@ import { Text } from "@/components/Text";
 import { View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as WebBrowser from "expo-web-browser";
-import * as Linking from "expo-linking"
-import { isClerkAPIResponseError, useSignIn, useSSO } from "@clerk/clerk-expo";
+import * as Linking from "expo-linking";
+import { isClerkAPIResponseError,  useSSO } from "@clerk/clerk-expo";
 import { useState } from "react";
 import { ClerkAPIError } from "@clerk/types";
-import { router } from "expo-router";
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function Index() {
   const {startSSOFlow} = useSSO();
-  // const [setActive, signIn] = useSignIn();
   const [errors, setErrors] = useState<ClerkAPIError[]>([]);
 
   const handleSignInWithGoogle = async () => {
@@ -25,7 +23,6 @@ export default function Index() {
 
       if  (createdSessionId){
        await setActive!({session: createdSessionId});
-      //  router.replace("/(chat)");
       } else {
         // there is nos session
       }
@@ -46,7 +43,6 @@ export default function Index() {
       <View style={{ 
         flex: 1,
         justifyContent: "center",
-        // alignItems: "center",
         padding: 16,
         }}
       >
